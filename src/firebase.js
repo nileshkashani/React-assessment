@@ -19,6 +19,9 @@ const firebaseConfig = {
 };
 
 console.log(import.meta.env)
+console.log("VITE_PROJECT_ID:", import.meta.env.VITE_PROJECT_ID)
+
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
