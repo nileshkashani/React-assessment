@@ -5,7 +5,7 @@ import { useUIStore } from '../store/uiStore'
 
 
 function fetchImages({ pageParam = 1 }) {
-    return fetch(`https://api.unsplash.com/photos?page=${pageParam}&per_page=12&client_id=sjDFh-XXckWJPJbBQTBM98WuHjephRkLFrd2-IzGW8Q`)
+    return fetch(`https://api.unsplash.com/photos?page=${pageParam}&per_page=12&client_id=${import.meta.env.VITE_UNSPLASH_API_KEY}`)
         .then(res => res.json())
 }
 
