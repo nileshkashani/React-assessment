@@ -1,5 +1,5 @@
 import { useUIStore } from '../store/uiStore'
-import ReactionPanel from './reactionPanel'
+import ReactionPanel from './ReactionPanel'
 
 
 export default function ImageModel() {
