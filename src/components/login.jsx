@@ -60,7 +60,7 @@ const handleClick = async () => {
 }
 
 return (
-    <div>
+    <div className='flex justify-center items-center h-screen'>
         <Card className="w-full max-w-sm">
             <CardHeader>
                 <CardTitle>Login to your account</CardTitle>

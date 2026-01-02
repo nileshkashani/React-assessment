@@ -38,7 +38,7 @@ const Signup = () => {
     navigate('/login')
   }
   return (
-    <div>
+    <div className='flex justify-center items-center h-screen'>
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle>Signup to your account</CardTitle>
