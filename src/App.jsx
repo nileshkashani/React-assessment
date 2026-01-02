@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Suspense, lazy } from 'react'
 import './App.css'
+import ProtectedRoute from './components/protectedRoute'
 
 const Starter = lazy(() => import('./components/starter'))
 const Login = lazy(() => import('./components/login'))
@@ -23,7 +24,14 @@ function App() {
             <Route path='/' element={<Starter />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/dashboard' element={<Dashboard />} />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </Suspense>

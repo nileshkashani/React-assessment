@@ -18,7 +18,7 @@ const Dashboard = () => {
             <div className="w-1/2 p-6">
                 {realTimeReactions.map((r) => (
                     <div key={r.id} className='flex'>
-                        user {r.userId} reacted {r.emoji} to image <div onClick={() => setFocusedImage(r.url, r.imageId)}>{r.imageId}</div>
+                        user {r.userId} reacted {r.emoji} to image <div onClick={() => setFocusedImage(r.url, r.imageId)}> &nbsp;{r.imageId}</div>
                     </div>
                 ))}
             </div>
