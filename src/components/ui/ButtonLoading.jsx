@@ -3,9 +3,6 @@ import { Spinner } from "./spinner"
 import { useEffect } from "react"
 
 export function ButtonLoading({ loading }) {
-    useEffect(() => {
-        console.log(loading);
-    }, [loading])
   return (
     <Button
       size="sm"

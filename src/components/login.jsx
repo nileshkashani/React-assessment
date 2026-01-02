@@ -22,13 +22,6 @@ const Login = () => {
     const [password, setPassword] = useState("")
 
     const navigate = useNavigate()
-
-    // useEffect(() => {
-    //     console.log("email: ", email);
-    //     console.log("pass: ", password);
-    // }, [email, password])
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const resp = await login(email, password);
@@ -37,7 +30,6 @@ const Login = () => {
         localStorage.setItem("email", resp.user.email)
         localStorage.setItem("userId", resp.user.uid)
         localStorage.setItem("isAuthenticated", resp.user.emailVerified)
-        console.log(localStorage.getItem("isAuthenticated"))
         if(localStorage.getItem("isAuthenticated") == 'true'){
             navigate('/dashboard')
         }
@@ -54,7 +46,6 @@ const Login = () => {
         localStorage.setItem("email", resp.user.email)
         localStorage.setItem("userId", resp.user.uid)
         localStorage.setItem("isAuthenticated", resp.user.emailVerified)
-        console.log(localStorage.getItem("isAuthenticated"))
         if(localStorage.getItem("isAuthenticated") == 'true'){
             navigate('/dashboard')
         }

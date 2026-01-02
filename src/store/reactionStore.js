@@ -17,17 +17,4 @@ export const useReactionStore = create((set, get) => ({
       }
     }))
   }
-  // addReaction: (imageId, emoji, userName) => {
-  //   const existing = get().reactions[imageId] || []
-  //   console.log(imageId, userName, emoji)
-  //   const filtered = existing.filter(r => r.userName !== userName)
-
-  //   set({
-  //     reactions: {
-  //       ...get().reactions,
-  //       [imageId]: [...filtered, { userName, emoji }]
-  //     }
-  //   })
-  // }
-
 }))

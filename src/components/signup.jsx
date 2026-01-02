@@ -22,7 +22,6 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(auth.app.options.projectId)
     await signup(email, password, name);
     navigate("/dashboard");
   }

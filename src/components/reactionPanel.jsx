@@ -4,23 +4,23 @@ import { add } from '@/service/db'
 
 const emojis = ['❤️', '😂', '🔥', '👏', '😮']
 
-export default function ReactionPanel({ imageId }) {
+export default function ReactionPanel({ imageId, url }) {
+  
   const reactions = useReactionStore(state => state.reactions[imageId])
-  // const addReaction = useReactionStore(state => state.addReaction)
   const fetchReaction = useReactionStore(state => state.fetchReactions)
   const reaction = reactions || []
 
+  useEffect(() => {
+    console.log("credintials: ", imageId, url)
+  }, [imageId, url])
   const emojiCount = reaction.reduce((acc, r) => {
     acc[r.emoji] = (acc[r.emoji] || 0) + 1
     return acc
   }, {})
 
   const handleAddReaction = async (emoji) => {
-    localStorage.setItem("imageId", imageId);
-    localStorage.setItem("emoji", emoji);
-    localStorage.setItem("userName", localStorage.getItem("user") || localStorage.getItem("userId"));
-    // addReaction(imageId, e, localStorage.getItem("user"))
-    await add(imageId, emoji, localStorage.getItem("userId"));
+
+    await add(imageId, emoji, localStorage.getItem("userId"), url);
     fetchReaction(imageId);
   }
 

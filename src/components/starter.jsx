@@ -13,7 +13,7 @@ const Starter = () => {
         setIsActive(true)   
         setTimeout(() => {
             navigate('/login')
-        }, 1000)
+        }, 300)
     }
   return (
     <section className='font-mono'>

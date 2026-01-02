@@ -33,7 +33,7 @@ export default function Gallery() {
                 fetchNextPage()
             }
         })
-
+        // console.log(data)
         observer.observe(observerRef.current)
 
         return () => observer.disconnect()
@@ -58,7 +58,7 @@ export default function Gallery() {
                             src={image.urls.small}
                             className="rounded-lg object-cover w-full h-60 cursor-zoom-in scroll-smooth"
                             onClick={() => {
-                                setFocusedImage(image);
+                                setFocusedImage(image.urls.regular, image.id);
                             }}
                         />
                     ))

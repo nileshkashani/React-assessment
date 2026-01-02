@@ -1,32 +1,33 @@
-import { collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, query, where } from "firebase/firestore";
+import { collection, addDoc, updateDoc, deleteDoc, doc, getDocs, getDoc, query, where, serverTimestamp } from "firebase/firestore";
 import { db } from '../firebase'
 
-export async function add(imageId, emoji, userId) {
+export async function add(imageId, emoji, userId, url) {
     const q = query(
         collection(db, "reactions"),
         where("userId", "==", userId),
-        where("imageid", "==", imageId)
+        where("imageId", "==", imageId)
     )
     const existing = await getDocs(q)
-
-    console.log("add executed")
+    console.log("existing: ", existing)
+    
     if (existing.docs.length === 0) {
         const resp = await addDoc(collection(db, "reactions"), {
-            imageid: imageId,
-            emoji: emoji,
-            userId: userId
+            emoji,
+            userId,
+            imageId,
+            url,
+            timestamp: serverTimestamp()
         })
     }
     else {
-        console.log("update executed")
-        update(imageId, emoji, userId);
+        update(imageId, emoji, userId, url);
     }
 }
-export async function update(imageId, emoji, userId) {
-     const q = query(
+export async function update(imageId, emoji, userId, url) {
+    const q = query(
         collection(db, "reactions"),
         where("userId", "==", userId),
-        where("imageid", "==", imageId)
+        where("imageId", "==", imageId)
     )
     const resp = await getDocs(q);
     console.log(resp)
@@ -39,16 +40,22 @@ export async function update(imageId, emoji, userId) {
         return;
     }
 
-    const respUpdate = await updateDoc(docRef, { emoji });
+    await updateDoc(docRef, {
+        emoji,
+        userId,
+        imageId,
+        url,
+        timestamp: serverTimestamp()
+    })
+
 }
 
-export async function fetchAllReactions(imageId){
+export async function fetchAllReactions(imageId) {
     console.log("fetch all reactions executed")
     const q = query(
         collection(db, "reactions"),
-        where("imageid", "==", imageId )
-    )
+        where("imageId", "==", imageId)
+    )   
     const resp = await getDocs(q)
-    console.log("all reactions: ", resp);
     return resp.docs;
 }
