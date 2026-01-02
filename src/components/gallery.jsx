@@ -18,7 +18,8 @@ export default function Gallery() {
         fetchNextPage,
         hasNextPage,
         isFetchingNextPage,
-        status
+        isLoading,
+        isError
     } = useInfiniteQuery({
         queryKey: ['unsplash-images'],
         queryFn: fetchImages,
@@ -39,11 +40,15 @@ export default function Gallery() {
         return () => observer.disconnect()
     }, [fetchNextPage, hasNextPage, isFetchingNextPage])
 
-    if (status === 'loading') {
-        return <Spinner/>
+    if (isLoading) {
+        return (
+            <div className="h-[60vh] flex items-center justify-center">
+                <Spinner />
+            </div>
+        )
     }
 
-    if (status === 'error') {
+    if (isError) {
         return <div className="p-10 text-center">Error loading images</div>
     }
 
@@ -68,7 +73,7 @@ export default function Gallery() {
             <div ref={observerRef} className="h-10" />
 
             {isFetchingNextPage && (
-                <Spinner/>
+                <Spinner />
             )}
         </div>
     )

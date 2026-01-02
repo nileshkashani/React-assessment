@@ -8,7 +8,7 @@ export function useRealtimeCollection(colName) {
   useEffect(() => {
     const q = query(
       collection(db, colName),
-      orderBy("timestamp", "desc")
+      orderBy("timestamp", "asc")
     )
 
     const unsub = onSnapshot(q, (snapshot) => {
