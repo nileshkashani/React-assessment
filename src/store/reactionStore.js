@@ -3,18 +3,28 @@ import { create } from 'zustand'
 
 export const useReactionStore = create((set, get) => ({
   reactions: {},
-  fetchReactions: async (imageId) => {
-    const data = await fetchAllReactions(imageId);
+  comments: {},
+  fetchReactions: async (imageId, colName) => {
+    const data = await fetchAllReactions(imageId, colName);
     const parsed = data.map(doc => ({
       id: doc.id,
       ...doc.data()
     }))
-    console.log("parsed: ", parsed)
-    set(state => ({
-      reactions: {
-        ...state.reactions,
-        [imageId]: parsed
-      }
-    }))
+    if(colName === 'reactions'){
+      set(state => ({
+        reactions: {
+          ...state.reactions,
+          [imageId]: parsed
+        }
+      }))
+    }
+    else{
+      set(state => ({
+        comments: {
+          ...state.reactions,
+          [imageId]: parsed
+        }
+      }))
+    }
   }
 }))
