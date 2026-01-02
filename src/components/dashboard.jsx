@@ -16,12 +16,23 @@ const Dashboard = () => {
             </div>
 
             <div className="w-1/2 p-6">
-                {realTimeReactions.map((r) => (
-                    <div key={r.id} className='flex'>
-                        user {r.userId} reacted {r.emoji} to image <div onClick={() => setFocusedImage(r.url, r.imageId)}> &nbsp;{r.imageId}</div>
+                {realTimeReactions.map((r, i) => (
+                    <div
+                        key={r.id}
+                        className={`flex items-center px-2 py-1 ${i % 2 === 0 ? "bg-white" : "bg-blue-50"
+                            }`}
+                    >
+                        user {r.userId} reacted {r.emoji} to image{" "}
+                        <span
+                            onClick={() => setFocusedImage(r.url, r.imageId)}
+                            className="ml-1 cursor-pointer text-blue-600 hover:underline"
+                        >
+                            {r.imageId}
+                        </span>
                     </div>
                 ))}
             </div>
+
 
         </div>
     )
