@@ -70,7 +70,6 @@ export default function ImageModel() {
                 ))
               )
             }
-
           </div>
           <div>
             <Button className={'bg-blue-400 hover:bg-blue-600'} onClick={() => setIsClicked(false)}>Close</Button>
