@@ -41,7 +41,6 @@ const Login = () => {
 
 const handleSigninWithGoogle = async () => {
     const resp = await signInWithGoogle();
-    console.log(resp)
     localStorage.setItem("user", resp.user.displayName)
     localStorage.setItem("email", resp.user.email)
     localStorage.setItem("userId", resp.user.uid)

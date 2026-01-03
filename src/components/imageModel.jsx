@@ -4,10 +4,13 @@ import ReactionPanel from './reactionPanel'
 import { useRealtimeCollection } from './db';
 import { CgProfile } from 'react-icons/cg';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@radix-ui/react-hover-card';
+import { Button } from './ui/button';
 
 export default function ImageModel() {
   const { focusedImage, clearFocusedImage } = useUIStore()
 
+  const { isClicked } = useUIStore()
+  const setIsClicked = useUIStore(s => s.setIsClicked)
   const realTimeComments = useRealtimeCollection("comments") || []
 
   const commentsByImage = realTimeComments.reduce((acc, c) => {
@@ -40,22 +43,40 @@ export default function ImageModel() {
           Close
         </button>
       </div>
+      {isClicked &&
+        <div className="bg-white rounded-md flex flex-col gap-3 p-4">
+          <div className="font-bold text-3xl">Comments</div>
+          <div>
+            {
+              commentMap.length === 0 ? (
+                <div className="text-gray-500 text-sm italic">No comments yet</div>
+              ) : (
+                commentMap.map(m => (
+                  <div key={m.id} className="flex items-center gap-3 py-1">
+                    <HoverCard>
+                      <HoverCardTrigger asChild>
+                        <span className="inline-flex items-center justify-center cursor-pointer">
+                          <CgProfile className="text-3xl" />
+                        </span>
+                      </HoverCardTrigger>
 
-      <div className="bg-white rounded-md flex flex-col gap-3">
-        <div className="font-bold text-3xl">Comments</div>
-        <div>
-          {commentMap.map((m, i) => (
-            <div key={m.id} className="text-4xl flex">
-              <span>
-                <HoverCard>
-                  <HoverCardTrigger><CgProfile className='cursor-pointer' /></HoverCardTrigger>
-                  <HoverCardContent className='cursor-pointer rounded-md p-2 hover:bg-amber-50 '>{m.userId}</HoverCardContent>
-                </HoverCard>
-              </span><span className='text-xl'>{m.emoji}</span>
-            </div>
-          ))}
+                      <HoverCardContent className=" bg-white rounded-md p-2 hover:bg-amber-50">
+                        {m.userId}
+                      </HoverCardContent>
+                    </HoverCard>
+
+                    <span className="text-xl">{m.emoji}</span>
+                  </div>
+                ))
+              )
+            }
+
+          </div>
+          <div>
+            <Button className={'bg-blue-400 hover:bg-blue-600'} onClick={() => setIsClicked(false)}>Close</Button>
+          </div>
         </div>
-      </div>
+      }
     </div>
   )
 }

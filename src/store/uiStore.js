@@ -4,5 +4,8 @@ export const useUIStore = create(set => ({
   focusedImage: null,
   setFocusedImage: (imageUrl, imageId) =>
     set({ focusedImage: { imageUrl, imageId } }),
-  clearFocusedImage: () => set({ focusedImage: null })
+  clearFocusedImage: () => set({ focusedImage: null }),
+
+  isClicked: false,
+  setIsClicked: (val) => set({isClicked: val})
 }))

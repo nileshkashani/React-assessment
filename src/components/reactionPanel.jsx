@@ -5,10 +5,17 @@ import { FaCommentDots } from "react-icons/fa";
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { useRealtimeCollection } from './db';
+import { useUIStore } from '@/store/uiStore';
 
 const emojis = ['❤️', '😂', '🔥', '👏', '😮']
 
 export default function ReactionPanel({ imageId, url }) {
+
+  const setIsClicked = useUIStore(s => s.setIsClicked)
+
+  const handleClick = () => {
+    setIsClicked(true);
+  }
 
   const [comment, setComment] = useState("");
   const fetchReaction = useReactionStore(state => state.fetchReactions)
@@ -49,8 +56,9 @@ export default function ReactionPanel({ imageId, url }) {
 
   return (
     <div className='flex gap-3'>
-      <div className="mt-4 flex justify-between ">
-        <div className='flex flex-col justify-between'>
+      <div className="mt-4 flex justify-between w-full">
+
+        <div className='flex flex-col'>
           <div className="flex gap-2">
             {emojis.map(e => (
               <button
@@ -73,24 +81,21 @@ export default function ReactionPanel({ imageId, url }) {
               </span>
             ))}
           </div>
-
         </div>
         <div className='flex flex-col justify-between'>
-
           <div className='flex gap-2'>
             <Input placeholder="add comment" onChange={(e) => setComment(e.target.value)} />
             <Button onClick={handleSubmit}>add</Button>
           </div>
-          <div className='flex flex-col justify-center items-center'>
+          <div className='flex flex-col justify-center items-center cursor-pointer ' onClick={handleClick}>
             <div className='text-xl pt-2'>
               comments
             </div>
-
+            <div>
+              <FaCommentDots className='text-4xl' />
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-        
       </div>
     </div>
   )
