@@ -27,21 +27,35 @@ function App() {
           <div className='pl-5 pt-3 pb-3'>
             ExploreImg
           </div>
-          {user && <div className='pr-5 pt-3 pb-3'>
-            <HoverCard>
-              <HoverCardTrigger><CgProfile className='cursor-pointer'/></HoverCardTrigger>
-              <HoverCardContent>
-                <li onClick={logout} className="cursor-pointer rounded-md p-2 hover:bg-amber-50">
-                  Logout
-                </li>
-              </HoverCardContent>
-            </HoverCard>
-          </div>}
-          
+          {user && (
+            <div className="pr-5 pt-3 pb-3">
+              <HoverCard openDelay={0} closeDelay={0}>
+                <HoverCardTrigger asChild>
+                  <button className="inline-flex items-center justify-center">
+                    <CgProfile className="cursor-pointer text-3xl" />
+                  </button>
+                </HoverCardTrigger>
+
+                <HoverCardContent
+                  className="bg-white rounded-md shadow-lg p-2"
+                  sideOffset={6}
+                >
+                  <button
+                    onClick={logout}
+                    className="w-full text-left cursor-pointer rounded-md p-2 hover:bg-amber-50"
+                  >
+                    Logout
+                  </button>
+                </HoverCardContent>
+              </HoverCard>
+            </div>
+          )}
+
+
         </div>
       </nav>
 
-      <Suspense fallback={<div className="flex justify-center items-center"><Spinner/></div>}>
+      <Suspense fallback={<div className="flex justify-center items-center"><Spinner /></div>}>
         <ImageModel />
 
         <BrowserRouter>
