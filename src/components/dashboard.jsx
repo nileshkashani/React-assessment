@@ -30,7 +30,7 @@ const Dashboard = () => {
                     <Button
                         key={t}
                         className={`bg-white text-black hover:bg-amber-50 ${tab === t ? 'border-2 border-blue-400' : ''
-                            }`}
+                            } cursor-pointer`}
                         onClick={() => setTab(t)}
                     >
                         {t.toUpperCase()}

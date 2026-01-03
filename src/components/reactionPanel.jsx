@@ -40,6 +40,7 @@ export default function ReactionPanel({ imageId, url }) {
   }, {})
 
   const handleSubmit = async () => {
+    setIsClicked(true);
     await add(imageId, comment, localStorage.getItem("userId"), url, "comments");
     fetchReaction(imageId, 'comments');
   }
@@ -56,15 +57,15 @@ export default function ReactionPanel({ imageId, url }) {
 
   return (
     <div className='flex gap-3'>
-      <div className="mt-4 flex justify-between w-full">
+      <div className="mt-4 flex justify-between w-full ">
 
-        <div className='flex flex-col'>
+        <div className='flex flex-col gap-3'>
           <div className="flex gap-2">
             {emojis.map(e => (
               <button
                 key={e}
                 onClick={() => handleAddReaction(e)}
-                className="text-4xl hover:scale-110 transition cursor-pointer"
+                className="text-2xl md:text-4xl hover:scale-110 transition cursor-pointer"
               >
                 {e}
               </button>
@@ -76,7 +77,7 @@ export default function ReactionPanel({ imageId, url }) {
             </div>
 
             {Object.entries(emojiCount).map(([emoji, count]) => (
-              <span key={emoji} className="text-4xl">
+              <span key={emoji} className="text-2xl md:text-4xl">
                 {emoji} <span className="text-lg">{count}</span>
               </span>
             ))}
@@ -85,14 +86,14 @@ export default function ReactionPanel({ imageId, url }) {
         <div className='flex flex-col justify-between'>
           <div className='flex gap-2'>
             <Input placeholder="add comment" onChange={(e) => setComment(e.target.value)} />
-            <Button onClick={handleSubmit}>add</Button>
+            <Button onClick={handleSubmit} className={'bg-blue-400 hover:bg-blue-600 cursor-pointer'}>add</Button>
           </div>
-          <div className='flex flex-col justify-center items-center cursor-pointer ' onClick={handleClick}>
+          <div className='flex flex-col justify-center items-end cursor-pointer ' onClick={handleClick}>
             <div className='text-xl pt-2'>
               comments
             </div>
             <div>
-              <FaCommentDots className='text-4xl' />
+              <FaCommentDots className='text-2xl md:text-4xl text-blue-400 hover:text-blue-600' />
             </div>
           </div>
         </div>
