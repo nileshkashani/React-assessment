@@ -53,18 +53,15 @@ export default function Gallery() {
     }
 
     return (
-        <div className="p-6">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="p-4 sm:p-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                 {data?.pages?.map(page =>
                     page.map(image => (
-
                         <img
                             key={image.id}
                             src={image.urls.small}
-                            className="rounded-lg object-cover w-full h-60 cursor-zoom-in scroll-smooth"
-                            onClick={() => {
-                                setFocusedImage(image.urls.regular, image.id);
-                            }}
+                            className="rounded-lg object-cover w-full h-40 sm:h-52 lg:h-60 cursor-zoom-in"
+                            onClick={() => setFocusedImage(image.urls.regular, image.id)}
                         />
                     ))
                 )}
@@ -72,9 +69,8 @@ export default function Gallery() {
 
             <div ref={observerRef} className="h-10" />
 
-            {isFetchingNextPage && (
-                <Spinner />
-            )}
+            {isFetchingNextPage && <Spinner />}
         </div>
+
     )
 }
