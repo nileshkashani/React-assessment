@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import Gallery from './gallery';
 import { useRealtimeCollection } from './db';
 import { useUIStore } from '@/store/uiStore';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@radix-ui/react-hover-card';
 import { Button } from './ui/button';
 import { CgProfile } from 'react-icons/cg';
-// import RightPanel from './ui/rightPanel';
+
 
 const Dashboard = () => {
 
@@ -15,6 +15,7 @@ const Dashboard = () => {
     const realTimeReactions = useRealtimeCollection("reactions", sessionStart) || [];
     const setFocusedImage = useUIStore(s => s.setFocusedImage)
     const realTimeComments = useRealtimeCollection("comments", sessionStart) || []
+   
 
     function formatTime(ts) {
         if (!ts?.seconds) return ''
